@@ -20,3 +20,6 @@
 
 # Credit
 * Samsung Open Source Project : [G970N](https://opensource.samsung.com/uploadSearch?searchValue=G970NKSU7HWD3) [G973N](https://opensource.samsung.com/uploadSearch?searchValue=G973NKSU7HWD3) [G975N](https://opensource.samsung.com/uploadSearch?searchValue=G975NKSU7HWD3) [G977N](https://opensource.samsung.com/uploadSearch?searchValue=G977NKSU6HWD3)
+* Kernel Source Fix : [CruelKernel](https://github.com/CruelKernel/samsung-exynos9820) [Ravindu Deshan](https://github.com/ravindu644/samsung_exynos9820_stock)
+* KernelSU Next : [rifsxd](https://github.com/KernelSU-Next/KernelSU-Next)
+* SUSFS : [sidex15](https://github.com/sidex15/susfs4ksu-module) [simonpunk](https://gitlab.com/simonpunk/susfs4ksu/-/tree/kernel-4.14?ref_type=heads)
