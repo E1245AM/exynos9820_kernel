@@ -21,9 +21,11 @@ case "$MODEL" in
         ;;
 esac
 
+
 export ARCH=arm64
 export PLATFORM_VERSION=12
 export ANDROID_MAJOR_VERSION=s
+
 
 make ARCH=arm64 ${VARIANT}_defconfig
 make ARCH=arm64 -j16
