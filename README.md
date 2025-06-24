@@ -6,6 +6,7 @@
 * **overlay_fs defconfig Enabled** (Required KernelSU Compile)
 
 
+
 # How to Compille? 
 
 * **Local LINUX PC**
@@ -13,6 +14,7 @@
 *         ./build_kernel.sh MODEL 
 * MODEL = G970N or G973N or G975N or G977N (If you don't write model, this kernel won't compile;;)
 * **If you Compile Success, You can get Image or Image.gz file**
+
 
 
 # Credit
