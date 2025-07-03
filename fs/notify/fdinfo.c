@@ -33,7 +33,7 @@ static void show_fdinfo(struct seq_file *m, struct file *f,
 static void show_fdinfo(struct seq_file *m, struct file *f,
 			void (*show)(struct seq_file *m,
 				     struct fsnotify_mark *mark))
-#endif
+#endif				     
 {
 	struct fsnotify_group *group = f->private_data;
 	struct fsnotify_mark *mark;
@@ -42,9 +42,9 @@ static void show_fdinfo(struct seq_file *m, struct file *f,
 	list_for_each_entry(mark, &group->marks_list, g_list) {
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 		show(m, mark, f);
-#else
+#else	
 		show(m, mark);
-#endif
+#endif		
 		if (seq_has_overflowed(m))
 			break;
 	}
@@ -101,7 +101,7 @@ static void inotify_fdinfo(struct seq_file *m, struct fsnotify_mark *mark)
 	inode_mark = container_of(mark, struct inotify_inode_mark, fsn_mark);
 	inode = igrab(mark->connector->inode);
 	if (inode) {
-	        u32 mask = mark->mask & IN_ALL_EVENTS;
+		u32 mask = mark->mask & IN_ALL_EVENTS;	
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 		if (likely(current->susfs_task_state & TASK_STRUCT_NON_ROOT_USER_APP_PROC) &&
 				unlikely(inode->i_state & INODE_STATE_SUS_KSTAT)) {
@@ -137,7 +137,7 @@ out_seq_printf:
 		 * that we expose to userspace.  There is at
 		 * least one bit (FS_EVENT_ON_CHILD) which is
 		 * used only internally to the kernel.
-		 */		
+		 */
 		seq_printf(m, "inotify wd:%x ino:%lx sdev:%x mask:%x ignored_mask:%x ",
 			   inode_mark->wd, inode->i_ino, inode->i_sb->s_dev,
 			   mask, mark->ignored_mask);
