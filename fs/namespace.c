@@ -327,6 +327,7 @@ retry:
 	return res;
 }
 #endif
+
 static int mnt_alloc_id(struct mount *mnt)
 {
 	int res;
@@ -395,7 +396,7 @@ static void mnt_free_id(struct mount *mnt)
 		spin_unlock(&mnt_id_lock);
 		return;
 	}
-#endif
+#endif	
 	spin_lock(&mnt_id_lock);
 	ida_remove(&mnt_id_ida, id);
 	if (mnt_id_start > id)
@@ -453,7 +454,7 @@ void mnt_release_group_id(struct mount *mnt)
 		mnt->mnt_group_id = 0;
 		return;
 	}
-#endif
+#endif	
 	ida_remove(&mnt_group_ida, id);
 	if (mnt_group_start > id)
 		mnt_group_start = id;
@@ -529,7 +530,7 @@ static struct mount *alloc_vfsmnt(const char *name)
 		err = mnt_alloc_id(mnt);
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 bypass_orig_flow:
-#endif
+#endif		
 		if (err)
 			goto out_free_cache;
 #ifdef CONFIG_RKP_NS_PROT
@@ -1431,7 +1432,7 @@ vfs_kern_mount(struct file_system_type *type, int flags, const char *name, void 
 
 	if (!type)
 		return ERR_PTR(-ENODEV);
-
+		
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	// For newly created mounts, the only caller process we care is KSU
 	if (unlikely(susfs_is_current_ksu_domain())) {
@@ -1442,7 +1443,7 @@ vfs_kern_mount(struct file_system_type *type, int flags, const char *name, void 
 bypass_orig_flow:
 #else
 	mnt = alloc_vfsmnt(name);
-#endif
+#endif	
 	if (!mnt)
 		return ERR_PTR(-ENOMEM);
 #ifdef CONFIG_RKP_NS_PROT
@@ -1575,8 +1576,8 @@ static struct mount *clone_mnt(struct mount *old, struct dentry *root,
 	mnt = alloc_vfsmnt(old->mnt_devname, false, 0);
 bypass_orig_flow:
 #else
- 	mnt = alloc_vfsmnt(old->mnt_devname);
-#endif
+	mnt = alloc_vfsmnt(old->mnt_devname);
+#endif	
 	if (!mnt)
 		return ERR_PTR(-ENOMEM);
 
@@ -1663,7 +1664,7 @@ bypass_orig_flow:
 	mnt->mnt_mountpoint = mnt->mnt.mnt_root;
 #endif
 	mnt->mnt_parent = mnt;
-
+	
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	// If caller process is zygote and not doing unshare, so we just reorder the mnt_id
 	if (likely(is_current_zygote_domain) && !(flag & CL_ZYGOTE_COPY_MNT_NS)) {
@@ -3057,7 +3058,7 @@ static int do_loopback(struct path *path, const char *old_name,
 #if defined(CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT)
 orig_flow:
 #endif
-#endif // #if defined(CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT) || defined(CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT)
+#endif // #if defined(CONFIG_KSU_SUSFS_AUTO_ADD_SUS_BIND_MOUNT) || defined(CONFIG_KSU_SUSFS_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT)	
 
 out2:
 	unlock_mount(mp);
@@ -3770,7 +3771,7 @@ long do_mount(const char *dev_name, const char __user *dir_name,
 			susfs_auto_add_sus_ksu_default_mount(dir_name);
 		}
 	}
-#endif
+#endif				      
 dput_out:
 	path_put(&path);
 	return retval;
@@ -3871,7 +3872,6 @@ struct mnt_namespace *copy_mnt_ns(unsigned long flags, struct mnt_namespace *ns,
 	copy_flags = CL_COPY_UNBINDABLE | CL_EXPIRE;
 	if (user_ns != ns->user_ns)
 		copy_flags |= CL_SHARED_TO_SLAVE | CL_UNPRIVILEGED;
-		
 #ifdef CONFIG_KSU_SUSFS_SUS_MOUNT
 	// Always let clone_mnt() in copy_tree() know it is from copy_mnt_ns()
 	copy_flags |= CL_COPY_MNT_NS;
@@ -3879,8 +3879,7 @@ struct mnt_namespace *copy_mnt_ns(unsigned long flags, struct mnt_namespace *ns,
 		// Let clone_mnt() in copy_tree() know copy_mnt_ns() is run by zygote process
 		copy_flags |= CL_ZYGOTE_COPY_MNT_NS;
 	}
-#endif
-
+#endif		
 #ifdef CONFIG_RKP_NS_PROT
 	new = copy_tree(old, old->mnt->mnt_root, copy_flags);
 #else
@@ -3958,7 +3957,7 @@ struct mnt_namespace *copy_mnt_ns(unsigned long flags, struct mnt_namespace *ns,
 	// should be fine here assuming zygote is forking/unsharing app in one single thread.
 	// Or should we put a lock here?
 	current->susfs_last_fake_mnt_id = last_entry_mnt_id;
-#endif
+#endif	
 
 	namespace_unlock();
 
