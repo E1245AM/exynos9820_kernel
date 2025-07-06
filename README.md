@@ -12,7 +12,7 @@
 * **Prepare GCC & Clang Compiler** : [Download](https://github.com/CruelKernel/samsung-exynos9820-toolchain.git) (I recommend make "toolchain" folder (mkdir), and download compiler in this folder)
 * Open terminal
 *         ./build_kernel.sh MODEL 
-* MODEL = G970N or G973N or G975N or G977N or N971N or N976N (If you don't write model, this kernel won't compile;;)
+* MODEL = **G970N** or **G973N** or **G975N** or **G977N** or **N971N** or **N976N** (If you don't write model, this kernel won't compile;;)
 * **If you Compile Success, You can get Image or Image.gz file**
 
 
