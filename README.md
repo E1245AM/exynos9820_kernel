@@ -13,11 +13,11 @@
 * Open terminal
 *         ./build_kernel.sh MODEL 
 * MODEL = **G970N** or **G973N** or **G975N** or **G977N** or **N971N** or **N976N** (If you don't write model, this kernel won't compile;;)
-* **If you Compile Success, You can get boot.img | dt.img | dtbo.img and Odin_flashable file**
+* **If you Compile Success, You can get boot.img | dt.img | dtbo.img and Odin_flashable file in "out" folder**
 
 
 # 📋 Credit
 * Samsung Open Source Project : [Click](https://opensource.samsung.com/main)
-* Kernel Source Fix : [CruelKernel](https://github.com/CruelKernel/samsung-exynos9820) [Ravindu Deshan](https://github.com/ravindu644/samsung_exynos9820_stock)
+* Kernel Source Fix : [CruelKernel](https://github.com/CruelKernel/samsung-exynos9820) [ravindu644](https://github.com/ravindu644/samsung_exynos9820_stock)
 * KernelSU Next : [rifsxd](https://github.com/KernelSU-Next/KernelSU-Next)
 * SUSFS : [sidex15](https://github.com/sidex15/susfs4ksu-module) [simonpunk](https://gitlab.com/simonpunk/susfs4ksu/-/tree/kernel-4.14?ref_type=heads)
