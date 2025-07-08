@@ -27,6 +27,8 @@ case "$MODEL" in
         ;;
 esac
 
+make mrproper
+
 export ARCH=arm64
 export PLATFORM_VERSION=12
 export ANDROID_MAJOR_VERSION=s
@@ -83,24 +85,24 @@ cd "$LOCATION"
 mv "$AIK_DIR/image-new.img" "$OUT_DIR/boot.img"
 
 # Make dt.img file
-cd "$LOCATION"
-case "$MODEL" in
-    G970N | G973N | G975N | G977N )
-	python3 mkdtboimg.py create dt.img \
-  	--page_size=2048 \
-  	--version=0 \
-  	--id=0x0 --rev=0x0 --custom0=0x0 --custom1=0x0 --custom2=0x0 --custom3=0x0 \
-  	arch/arm64/boot/dts/exynos/exynos9820.dtb --custom0=0x00 --custom1=0xff --id=0x0 --rev=0x0 
-        ;;
-    N971N | N976N )
-	python3 mkdtboimg.py create dt.img \
-  	--page_size=2048 \
-  	--version=0 \
-  	--id=0x0 --rev=0x0 --custom0=0x0 --custom1=0x0 --custom2=0x0 --custom3=0x0 \
-  	arch/arm64/boot/dts/exynos/exynos9825.dtb --custom0=0x00 --custom1=0xff --id=0x0 --rev=0x0 
-        ;;      
-esac
-mv "dt.img" "$OUT_DIR/dt.img"
+#cd "$LOCATION"
+#case "$MODEL" in
+#     G970N | G973N | G975N | G977N )
+# 	python3 mkdtboimg.py create dt.img \
+#  	--page_size=2048 \
+#  	--version=0 \
+#  	--id=0x0 --rev=0x0 --custom0=0x0 --custom1=0x0 --custom2=0x0 --custom3=0x0 \
+#  	arch/arm64/boot/dts/exynos/exynos9820.dtb --custom0=0x00 --custom1=0xff --id=0x0 --rev=0x0 
+#        ;;
+#    N971N | N976N )
+#	python3 mkdtboimg.py create dt.img \
+#  	--page_size=2048 \
+#  	--version=0 \
+#  	--id=0x0 --rev=0x0 --custom0=0x0 --custom1=0x0 --custom2=0x0 --custom3=0x0 \
+#  	arch/arm64/boot/dts/exynos/exynos9825.dtb --custom0=0x00 --custom1=0xff --id=0x0 --rev=0x0 
+#        ;;      
+#esac
+#mv "dt.img" "$OUT_DIR/dt.img"
 
 # Make dtbo.img file
 cd "$LOCATION"
@@ -187,4 +189,7 @@ mv "dtbo.img" "$OUT_DIR/dtbo.img"
 
 # Make tar_file
 cd $OUT_DIR
-tar -cvf ${MODEL}_KSUN_SUSFS.tar boot.img dt.img dtbo.img
+#tar -cvf ${MODEL}_KSUN_SUSFS.tar boot.img dt.img dtbo.img
+
+timestamp=$(date +"%Y%m%d%H%M%S")
+tar -cvf "${MODEL}_KSUN_SUSFS_${timestamp}.tar" boot.img dtbo.img
