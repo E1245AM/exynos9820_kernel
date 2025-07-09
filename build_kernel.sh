@@ -27,8 +27,9 @@ case "$MODEL" in
         ;;
 esac
 
-make mrproper
-
+#make mrproper
+START_TIME=$(date +%s)
+alias python=python3
 export ARCH=arm64
 export PLATFORM_VERSION=12
 export ANDROID_MAJOR_VERSION=s
@@ -39,7 +40,6 @@ make -j16 mrproper
 make ARCH=arm64 ${DEVICE}_defconfig || exit 1
 make ARCH=arm64 -j16 || exit 1
 
-
 # Make file
 IMAGE="arch/arm64/boot/Image"
 LOCATION=$(pwd)
@@ -47,7 +47,7 @@ AIK_DIR="AIK"
 OUT_DIR="out"
 
 if [ -d "$OUT_DIR" ]; then
-    rm -rf "$OUT_DIR"/*
+    rm -rf "$OUT_DIR"/*.img
 else
     mkdir -p "$OUT_DIR"
 fi
@@ -83,6 +83,7 @@ mkdir ramdisk
 
 cd "$LOCATION"
 mv "$AIK_DIR/image-new.img" "$OUT_DIR/boot.img"
+mv "$AIK_DIR/vbmeta.img" "$OUT_DIR/vbmeta.img"
 
 # Make dt.img file
 #cd "$LOCATION"
@@ -192,6 +193,14 @@ cd $OUT_DIR
 #tar -cvf ${MODEL}_KSUN_SUSFS.tar boot.img dt.img dtbo.img
 
 timestamp=$(date +"%Y%m%d%H%M%S")
-tar -cvf "${MODEL}_KSUN_SUSFS_${timestamp}.tar" boot.img dtbo.img
+tar -cvf "${MODEL}_KSUN_SUSFS_${timestamp}.tar" boot.img dtbo.img vbmeta.img
 rm -rf boot.img
 rm -rf dtbo.img
+rm -rf vbmeta.img
+
+END_TIME=$(date +%s)
+ELAPSED_TIME=$((END_TIME - START_TIME))
+
+echo -e "\nBuild completed!"
+echo "Output file path: $(realpath "${MODEL}_KSUN_SUSFS_${timestamp}.tar")"
+echo "Total build time: ${ELAPSED_TIME} seconds"
