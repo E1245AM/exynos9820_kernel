@@ -1,1 +1,1 @@
-#include "npu-ver-info~"
+#include <linux/version.h>

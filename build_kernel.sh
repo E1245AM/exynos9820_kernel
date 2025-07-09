@@ -193,3 +193,5 @@ cd $OUT_DIR
 
 timestamp=$(date +"%Y%m%d%H%M%S")
 tar -cvf "${MODEL}_KSUN_SUSFS_${timestamp}.tar" boot.img dtbo.img
+rm -rf boot.img
+rm -rf dtbo.img
