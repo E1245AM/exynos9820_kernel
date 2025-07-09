@@ -190,7 +190,6 @@ mv "dtbo.img" "$OUT_DIR/dtbo.img"
 
 # Make tar_file
 cd $OUT_DIR
-#tar -cvf ${MODEL}_KSUN_SUSFS.tar boot.img dt.img dtbo.img
 
 timestamp=$(date +"%Y%m%d%H%M%S")
 tar -cvf "${MODEL}_KSUN_SUSFS_${timestamp}.tar" boot.img dtbo.img vbmeta.img
