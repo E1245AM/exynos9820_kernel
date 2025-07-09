@@ -83,7 +83,7 @@ mkdir ramdisk
 
 cd "$LOCATION"
 mv "$AIK_DIR/image-new.img" "$OUT_DIR/boot.img"
-mv "$AIK_DIR/vbmeta.img" "$OUT_DIR/vbmeta.img"
+cp "$AIK_DIR/vbmeta.img" "$OUT_DIR/vbmeta.img"
 
 # Make dt.img file
 #cd "$LOCATION"
