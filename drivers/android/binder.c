@@ -5117,6 +5117,8 @@ static int binder_ioctl_get_node_debug_info(struct binder_proc *proc,
 	return 0;
 }
 
+#define BINDER_ENABLE_ONEWAY_SPAM_DETECTION _IOW('b', 16, __u32)
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -5244,6 +5246,14 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		}
 		break;
 	}
+
+
+               case BINDER_ENABLE_ONEWAY_SPAM_DETECTION:
+		// Suppress unsupported ioctl command — return 0 to indicate handled
+		ret = 0;
+		break;
+
+
 	default:
 		ret = -EINVAL;
 		goto err;
